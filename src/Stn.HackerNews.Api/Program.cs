@@ -8,6 +8,9 @@ builder.Services
     .AddHackerNewsClient(builder.Configuration)
     .AddAppCaching(builder.Configuration)
     .AddBestStoriesFeature(builder.Configuration);
+builder.Services
+    .AddHackerNewsClient(builder.Configuration)
+    .AddAppCaching(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,7 +22,7 @@ app.UseSwaggerUI();
 
 app.MapGet("/", () => "Hacker News Best Stories API is running");
 
-// TEMPORARY: manual check that the client works. Removed in Step 6.
+// TEMPORARY: manual checks during development. Removed in Step 6.
 app.MapGet("/debug/best-ids", (IHackerNewsClient client, CancellationToken ct) =>
     client.GetBestStoryIdsAsync(ct));
 
@@ -48,16 +51,6 @@ app.MapGet("/debug/cached-story/{id:int}",
         await cache.SetAsync(key, story, ct);
         return Results.Ok(new { source = "hacker-news", story });
     });
-app.MapGet("/debug/best-stories", async (int n, BestStoriesRefresher refresher, CancellationToken ct) =>
-{
-    var snapshot = await refresher.GetOrLoadAsync(ct);
-    return Results.Ok(new
-    {
-        snapshot.RefreshedAt,
-        TotalCached = snapshot.Stories.Count,
-        Stories = snapshot.Stories.Take(n)
-    });
-});
 
 app.Run();
 
