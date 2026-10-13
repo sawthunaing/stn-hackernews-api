@@ -1,3 +1,4 @@
+using Stn.HackerNews.Api.Features.BestStories;
 using Stn.HackerNews.Api.Infrastructure.HackerNews;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,9 @@ app.MapGet("/debug/best-ids", (IHackerNewsClient client, CancellationToken ct) =
 
 app.MapGet("/debug/item/{id:int}", async (int id, IHackerNewsClient client, CancellationToken ct) =>
     await client.GetItemAsync(id, ct) is { } item ? Results.Ok(item) : Results.NotFound());
+
+app.MapGet("/debug/story/{id:int}", async (int id, IHackerNewsClient client, CancellationToken ct) =>
+    await client.GetItemAsync(id, ct) is { } item ? Results.Ok(StoryDto.FromItem(item)) : Results.NotFound());
 
 app.Run();
 

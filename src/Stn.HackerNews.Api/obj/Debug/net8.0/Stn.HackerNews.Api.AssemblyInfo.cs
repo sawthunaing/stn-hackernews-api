@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Stn.HackerNews.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2eb97d708becbd022c74c365edeeabdfc5a1b920")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4179bf2f7e9feb8a6fbfcd205fdf01a355913c96")]
 [assembly: System.Reflection.AssemblyProductAttribute("Stn.HackerNews.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Stn.HackerNews.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
