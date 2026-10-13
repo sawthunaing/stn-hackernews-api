@@ -19,12 +19,13 @@ public static class GetBestStoriesEndpoint
 {
     public static IEndpointRouteBuilder MapGetBestStories(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/stories/best", HandleAsync)
+        app.MapGet("/stories/best", HandleAsync)
             .WithName("GetBestStories")
             .WithTags("Stories")
             .WithSummary("Returns the best n Hacker News stories, sorted by score (descending).")
             .Produces<IReadOnlyList<StoryDto>>()
             .ProducesValidationProblem()
+            .ProducesProblem(StatusCodes.Status429TooManyRequests)
             .ProducesProblem(StatusCodes.Status503ServiceUnavailable);
 
         return app;
